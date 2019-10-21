@@ -21,7 +21,16 @@
             input.value = parseInt(input.value) + 1;
         }
 
-        // TODO: Add a function to decrease the value
+        function decrease(valueName) {
+            var input = document.getElementById(valueName);
+            var newvalue = parseInt(input.value) - 1;
+            if(newvalue < 0){
+                input.value = 0;
+            }else{
+                input.value = newvalue;
+            }
+
+        }
 
     </script>
 </head>
@@ -37,12 +46,19 @@
     </div>
 
     <!-- TODO: Add an input for the table base -->
-
+    <div>
+        <label for="tableBase">Table Base:</label>
+        <input type="submit" value="up" onclick="increase('tableBase')" id="tableBaseUp">
+        <input type="number" name="tableBase" id="tableBase" value="${circleInstance.tableBase}">
+        <input type="submit" value="down" onclick="decrease('tableBase')" id="tableBaseDown">
+    </div>
 </form>
 <svg width="400" height="400">
     <circle r="198" cx="200" cy="200"/>
-
     <!-- TODO: Display the lines computed on server side here. -->
+    <g:each var="line" in="${circleInstance.lines}">
+        <line x1="${line.x1}" x2="${line.x2}" y1="${line.y1}" y2="${line.y2}" />
+    </g:each>
 </svg>
 
 </body>
